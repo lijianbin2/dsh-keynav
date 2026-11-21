@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0
+
+- **`Ctrl+J` now works with no Session presented.** On the blank New Session page
+  (for example right after archiving the open conversation) it restores the first
+  row of the same workspace list the session step uses, then focuses that
+  Session's input once the Conversation mounts.
+- Added `assets/icon-180.png`, the raster storefront tile the plugin markets ask
+  for (they refuse SVG icons), drawn from the same geometry as `icon.svg`.
+
 ## 1.1.1
 
 - **Session stepping now works with no Session presented.** Archiving the open

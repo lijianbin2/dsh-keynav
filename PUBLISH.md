@@ -55,11 +55,12 @@ https://cdn.jsdelivr.net/gh/lijianbin2/dsh-keynav@main/market/dsh-index.json
 在 DSH：**插件 → 发现 → 添加索引源** 填这个地址，就能看到「键盘导航 / Keyboard navigation」
 条目并从 npm 安装。这是验证索引格式与安装链最快的方式。
 
-## ④ 进收录清单（进公共市场的唯一路径）
+## ④ 进收录清单（进公共市场的唯一路径）— 已提交
 
-- **awesome-dsh-plugin**：按 `market/awesome-entry.md` 里的条目提 PR/issue，分类 **UI Enhancements**。
-  它只收能用 `dsh plugin add` 安装、声明了 `dsh.bundle`、描述与源码一致的插件——本仓库三条都满足。
-- **dshfind**：仓库 + npm 包对上后每日自动同步；想加快可以去 `hikariming/dshfind` 提 issue。
+- **awesome-dsh-plugin**：已提交 PR [#17468](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/17468)，
+  只加一个数据文件 `data/plugins/lijianbin2__dsh-keynav.yml`（清单只收这种文件，两个 README 由脚本生成）。
+  现在等两件事：CI 的「仓库满 1 天」门槛自动重跑，以及维护者读代码后合并。细节见 `market/awesome-entry.md`。
+- **dshfind**：仓库公开后每日从 GitHub 同步；发布 npm 后条目还能显示下载量。
 
 ## ⑤ 验证收录
 

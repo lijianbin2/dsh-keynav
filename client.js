@@ -389,22 +389,21 @@ window.__ModuleLoader__.load({
     }
 
     /**
-     * Resolve the current Session's composer and the layout, without focusing.
+     * Resolve the composer facade of one Session through its scope.
      * @param ctx - the browser context the plugin runs on.
-     * @returns the composer facade and layout, or undefined when unavailable.
+     * @param sessionId - the Session whose composer is wanted.
+     * @returns the input facade, or undefined while the Session is not resident.
      */
-    function planFocus(ctx) {
+    function composerInput(ctx, sessionId) {
       const sessions = ctx.get('sessions')
       if (sessions === undefined) return undefined
-      const current = currentSession(ctx)
-      if (current === undefined) return undefined
-      const scope = sessions.scope(current.id)
+      const scope = sessions.scope(sessionId)
       if (scope === undefined) return undefined
       const conversation = scope.get('conversation')
       if (conversation === undefined || conversation === null) return undefined
       if (conversation.input === undefined || conversation.input === null) return undefined
       try {
-        return { input: conversation.input.for(scope), layout: ctx.get('layout') }
+        return conversation.input.for(scope)
       } catch (error) {
         console.error('[keynav] composer facade unavailable:', error)
         return undefined
@@ -412,10 +411,56 @@ window.__ModuleLoader__.load({
     }
 
     /**
-     * Focus the composer, retrying while the Conversation remounts.
-     * @param plan - resolved composer facade and layout.
+     * Hand the keyboard to the composer, retrying while the Conversation mounts.
+     * @param input - the Session's composer facade.
+     * @param remaining - frames still allowed.
      */
-    function applyFocus(plan) {
+    function ensureFocus(input, remaining) {
+      const active = typeof document === 'undefined' ? null : document.activeElement
+      if (active !== null && active !== undefined && active.isContentEditable === true) return
+      try {
+        input.focus()
+      } catch (error) {
+        console.error('[keynav] focus failed:', error)
+        return
+      }
+      if (remaining > 0 && typeof requestAnimationFrame === 'function') {
+        requestAnimationFrame(() => { ensureFocus(input, remaining - 1) })
+      }
+    }
+
+    /**
+     * Resolve what "focus the input box" means right now.
+     *
+     * Usually that is the presented Session's composer. When nothing is
+     * presented — archiving the open conversation leaves the blank New Session
+     * page behind — the plan restores the first row of the same workspace list
+     * the session step uses, and focuses it once it is resident.
+     * @param ctx - the browser context the plugin runs on.
+     * @returns a focus plan, or undefined when there is nothing to focus.
+     */
+    function planFocus(ctx) {
+      const layout = ctx.get('layout')
+      const current = currentSession(ctx)
+      if (current !== undefined) {
+        const input = composerInput(ctx, current.id)
+        return input === undefined ? undefined : { input, layout }
+      }
+      const workspace = ctx.get('uiWorkspace')
+      if (workspace === undefined) return undefined
+      const sequence = workspaceSequence(ctx, undefined)
+      if (sequence === undefined || sequence.length === 0) return undefined
+      const id = sequence[0]
+      if (id === undefined) return undefined
+      return { workspace, id, layout }
+    }
+
+    /**
+     * Apply a focus plan, opening the target Session first when there was none.
+     * @param plan - resolved composer facade, or the Session to restore.
+     * @param ctx - the browser context the plugin runs on.
+     */
+    function applyFocus(plan, ctx) {
       if (plan.layout !== undefined) {
         try {
           plan.layout.selectPanel(null)
@@ -423,20 +468,28 @@ window.__ModuleLoader__.load({
           console.error('[keynav] returning to the Conversation failed:', error)
         }
       }
-      const ensure = (remaining) => {
-        const active = typeof document === 'undefined' ? null : document.activeElement
-        if (active !== null && active !== undefined && active.isContentEditable === true) return
-        try {
-          plan.input.focus()
-        } catch (error) {
-          console.error('[keynav] focus failed:', error)
+      if (plan.input !== undefined) {
+        ensureFocus(plan.input, 10)
+        return
+      }
+      try {
+        plan.workspace.openSession(plan.id)
+      } catch (error) {
+        console.error('[keynav] restoring the Session failed:', error)
+        return
+      }
+      // The composer exists only after the Session is retained and mounted.
+      let frames = 0
+      const wait = () => {
+        const input = composerInput(ctx, plan.id)
+        if (input !== undefined) {
+          ensureFocus(input, 10)
           return
         }
-        if (remaining > 0 && typeof requestAnimationFrame === 'function') {
-          requestAnimationFrame(() => { ensure(remaining - 1) })
-        }
+        frames += 1
+        if (frames < 60 && typeof requestAnimationFrame === 'function') requestAnimationFrame(wait)
       }
-      ensure(10)
+      if (typeof requestAnimationFrame === 'function') requestAnimationFrame(wait)
     }
 
     /** Component-local stylesheet; the tokens are the host's, the classes are ours. */
@@ -644,7 +697,7 @@ window.__ModuleLoader__.load({
             'web:windows': { code: 'KeyJ', modifiers: ['primary', 'alt'] },
           }, () => {
             const target = planFocus(scope)
-            return target === undefined ? undefined : { run: () => { applyFocus(target) } }
+            return target === undefined ? undefined : { run: () => { applyFocus(target, scope) } }
           })
         })
       },
