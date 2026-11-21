@@ -1,37 +1,26 @@
 # Changelog
 
-## 1.2.0
-
-- **`Ctrl+J` now works with no Session presented.** On the blank New Session page
-  (for example right after archiving the open conversation) it restores the first
-  row of the same workspace list the session step uses, then focuses that
-  Session's input once the Conversation mounts.
-- Added `assets/icon-180.png`, the raster storefront tile the plugin markets ask
-  for (they refuse SVG icons), drawn from the same geometry as `icon.svg`.
-
-## 1.1.1
-
-- **Session stepping now works with no Session presented.** Archiving the open
-  conversation leaves the blank New Session page in the middle column, and
-  `Alt+↑ / Alt+↓` did nothing there because no Session was retained to anchor the
-  step. The step now enters the list of the workspace that owns the most recent
-  Session, from the side the arrow points at.
-- A Session that is presented but archived (hidden by the default filter) is
-  treated the same way instead of leaving the step with no neighbour.
-- The workspace lookup builds one Session→Workspace index per press instead of
-  searching every workspace per Session.
-
 ## 1.1.0
 
-- **Session stepping now stays inside the current workspace.** `Alt+↑ / Alt+↓`
-  walks the rows of the workspace that owns the visible Session, in the
-  sidebar's default last-update order (selected blank first, then pinned, then
-  newest activity), and never crosses into another workspace.
+- **Session stepping stays inside the current workspace.** `Alt+↑ / Alt+↓` walks
+  the rows of the workspace that owns the visible Session, in the sidebar's
+  default last-update order (selected blank first, then pinned, then newest
+  activity), and never crosses into another workspace.
+- **Session stepping works with no Session presented.** Archiving the open
+  conversation leaves the blank New Session page in the middle column; the step
+  now enters that workspace's list from the side the arrow points at, and a
+  presented-but-archived Session is handled the same way.
+- **`Ctrl+J` restores a Session when none is presented**, then focuses its input
+  once the Conversation mounts.
 - Session stepping skips archived sessions and subagent children, matching the
   sidebar's default archived filter.
+- The workspace lookup builds one Session→Workspace index per press instead of
+  searching every workspace per Session.
 - Dictionaries for Spanish, French, German, Russian, and Portuguese.
-- `meta.detail` document with a feature image for the bundle detail page.
-- Package metadata for the plugin market: license, keywords, `engines.dsh`.
+- `meta.detail` document with a feature image for the bundle detail page, and a
+  raster `assets/icon-180.png` storefront tile for the plugin markets.
+- Package metadata for the plugin market: license, keywords, `engines.dsh`, and
+  `repository`.
 - One stand-aside guard for dialogs and terminals instead of two checks.
 
 ## 1.0.0
