@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Navegación con teclado",
+    "description": "Añade tres comportamientos de teclado: Ctrl+↑ / Ctrl+↓ mueven la selección por el área de plugins (las filas de extensiones de la barra lateral, con la conversación primero), Alt+↑ / Alt+↓ recorren solo las sesiones del espacio de trabajo actual (nunca entre espacios, en el orden por última actualización de la barra lateral) y Ctrl+J devuelve el cursor al cuadro de entrada de la sesión actual. Todos los atajos se pueden cambiar en Ajustes → General → Atajos de teclado. Las combinaciones con flechas solo tienen valor por defecto en Windows y macOS Desktop, porque las reglas de atajos de Web y Linux reservan las flechas para editar texto. Sin servicio Host, sin peticiones al modelo y sin tráfico de red.",
+    "detail": "docs/DETAIL.md"
+  }
+}

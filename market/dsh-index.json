@@ -1,0 +1,54 @@
+{
+  "format": 1,
+  "title": {
+    "en": "Keyboard navigation",
+    "zh": "键盘导航"
+  },
+  "description": {
+    "en": "Index of the dsh-keynav plugin: keyboard navigation for the sidebar plugin area, the current workspace sessions, and the message input.",
+    "zh": "dsh-keynav 插件的索引：用快捷键在插件区、当前工作区会话和输入框之间移动。"
+  },
+  "metadata": {
+    "categories": {},
+    "labels": {},
+    "sortKeys": {}
+  },
+  "plugins": [
+    {
+      "name": "dsh-keynav",
+      "title": {
+        "en": "Keyboard navigation",
+        "zh": "键盘导航"
+      },
+      "description": {
+        "en": "Ctrl+Up/Down cycles the sidebar plugin area, Alt+Up/Down steps through the current workspace’s sessions, Ctrl+J returns to the message input. Every binding is editable in Settings.",
+        "zh": "Ctrl+↑/↓ 切换左侧栏插件区，Alt+↑/↓ 在当前工作区的会话间切换，Ctrl+J 回到输入框。所有键位都能在设置里改。"
+      },
+      "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzNiIgaGVpZ2h0PSIzNiIgdmlld0JveD0iMCAwIDM2IDM2Ij4KICA8cmVjdCB4PSI2IiB5PSI2IiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHJ4PSI3IiBmaWxsPSJub25lIiBzdHJva2U9IiM4YTk3YTgiIHN0cm9rZS13aWR0aD0iMi40Ii8+CiAgPHBhdGggZD0iTTE0IDE1bDQtNCA0IDQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzJmN2ZkMCIgc3Ryb2tlLXdpZHRoPSIyLjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNCAyMWw0IDQgNC00IiBmaWxsPSJub25lIiBzdHJva2U9IiMyZjdmZDAiIHN0cm9rZS13aWR0aD0iMi4yIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==",
+      "metadata": {
+        "keywords": [
+          "dsh",
+          "dsh-plugin",
+          "keyboard",
+          "shortcuts",
+          "navigation",
+          "sidebar"
+        ],
+        "labels": [],
+        "sortKeys": {}
+      },
+      "versions": [
+        {
+          "version": "1.1.0",
+          "publishTimestamp": 1795243860,
+          "source": {
+            "type": "npm"
+          },
+          "engines": {
+            "dsh": ">=0.2.2-rc.5 <0.3.0-0"
+          }
+        }
+      ]
+    }
+  ]
+}

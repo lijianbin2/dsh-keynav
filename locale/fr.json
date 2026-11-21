@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Navigation clavier",
+    "description": "Ajoute trois comportements clavier : Ctrl+↑ / Ctrl+↓ déplacent la sélection dans la zone des extensions (les lignes de la barre latérale, la conversation en premier), Alt+↑ / Alt+↓ parcourent uniquement les sessions de l’espace de travail courant (jamais d’un espace à l’autre, dans l’ordre « dernière mise à jour » de la barre latérale) et Ctrl+J ramène le curseur dans le champ de saisie de la session courante. Tous les raccourcis se modifient dans Réglages → Général → Raccourcis clavier. Les raccourcis fléchés n’ont de valeur par défaut que sous Windows et macOS Desktop, car les règles Web et Linux réservent les flèches à l’édition de texte. Aucun service Host, aucune requête au modèle, aucun trafic réseau.",
+    "detail": "docs/DETAIL.md"
+  }
+}

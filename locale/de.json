@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Tastaturnavigation",
+    "description": "Fügt drei Tastaturverhalten hinzu: Ctrl+↑ / Ctrl+↓ bewegen die Auswahl im Plugin-Bereich (die Plugin-Zeilen der Seitenleiste, die Unterhaltung zuerst), Alt+↑ / Alt+↓ durchlaufen nur die Sitzungen des aktuellen Arbeitsbereichs (nie über Arbeitsbereiche hinweg, in der Standardreihenfolge „zuletzt aktualisiert“ der Seitenleiste) und Ctrl+J setzt den Cursor zurück in das Eingabefeld der aktuellen Sitzung. Alle Kürzel lassen sich unter Einstellungen → Allgemein → Tastenkürzel ändern. Die Pfeiltasten-Kürzel gelten standardmäßig nur unter Windows und macOS Desktop, weil die Web- und Linux-Regeln Pfeiltasten für die Textbearbeitung reservieren. Kein Host-Dienst, keine Modellanfrage, kein Netzwerkverkehr.",
+    "detail": "docs/DETAIL.md"
+  }
+}

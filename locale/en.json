@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Keyboard navigation",
+    "description": "Adds three keyboard behaviours: Ctrl+Up / Ctrl+Down move the selection in the plugin area (the sidebar's panel rows, with the Conversation first), Alt+Up / Alt+Down step through the sessions of the current workspace only (never across workspaces, in the sidebar's default last-update order), and Ctrl+J returns the caret to the current Session's input box. Every binding is editable in Settings → General → Keyboard shortcuts. The arrow chords default on Windows and macOS Desktop only, because the Web/Linux shortcut rules reserve bare arrow keys for text editing. No Host service, model request, or network traffic.",
+    "detail": "docs/DETAIL.md"
+  }
+}
