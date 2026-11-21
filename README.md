@@ -2,6 +2,17 @@
 
 Three keyboard behaviours for DSH navigation, and nothing else.
 
+## Install
+
+```sh
+dsh plugin add dsh-keynav
+# or straight from this repository, before the npm release:
+dsh plugin add git+https://github.com/lijianbin2/dsh-keynav.git
+```
+
+In the Web GUI the same bundle also installs from **Plugins → Add plugin** with a
+local directory. Requires DSH `>=0.2.2-rc.5 <0.3.0-0`.
+
 ## Behaviours
 
 | Keys (Windows / macOS Desktop) | Keys (Web) | What it does |
