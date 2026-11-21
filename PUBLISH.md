@@ -72,7 +72,8 @@ https://cdn.jsdelivr.net/gh/lijianbin2/dsh-keynav@main/market/dsh-index.json
 
 ## 版本约定
 
-- 改了用户可见行为 → `npm version minor` 并更新 CHANGELOG；
-- 只修 bug → `patch`；
-- 每次发布后同步更新 `market/dsh-index.json` 的 `versions[0]`（`version` 与 `publishTimestamp`），
+- **只有用户明确要求「优化」时才升版本号。** 修 bug、改文案、补文档一律不动 `version`，
+  照常提交、照常推送。
+- 需要升版本时按语义化：行为变化 → minor，纯修复 → patch，并同时更新 CHANGELOG。
+- 升版本后同步更新 `market/dsh-index.json` 的 `versions[0]`（`version` 与 `publishTimestamp`），
   索引条目的版本必须与 npm 上实际存在的版本一致，否则市场无法安装。
