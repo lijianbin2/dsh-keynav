@@ -1,6 +1,6 @@
 {
   "name": "dsh-keynav",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Keyboard navigation for DeepSeek Harness: Ctrl+Up/Down cycles the sidebar plugin area, Alt+Up/Down steps through the current workspace's sessions, Ctrl+J returns to the message input.",
   "type": "module",
   "license": "MIT",

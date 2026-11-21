@@ -280,16 +280,21 @@ window.__ModuleLoader__.load({
     }
 
     /**
-     * The sessions of one Session's own workspace, in the sidebar's default
-     * ("updated") row order: the selected blank first, then pinned rows, then the
-     * rest newest first — the same partitions `sectionMembers` applies. Archived
-     * rows stay hidden, like the default archived filter, and subagent children
-     * never appear as rows.
+     * The sessions of one workspace, in the sidebar's default ("updated") row
+     * order: the selected blank first, then pinned rows, then the rest newest
+     * first — the same partitions `sectionMembers` applies. Archived rows stay
+     * hidden, like the default archived filter, and subagent children never
+     * appear as rows.
+     *
+     * The workspace is the one that owns `anchorId`. Without a presented Session
+     * — archiving the open conversation leaves the blank New Session page behind
+     * — the most recent listed Session names the workspace instead, so stepping
+     * still starts inside the workspace the user was working in.
      * @param ctx - the browser context the plugin runs on.
-     * @param currentId - the Session whose workspace scopes the sequence.
+     * @param anchorId - the presented Session, or undefined when none is shown.
      * @returns ordered member ids, or undefined without a session list.
      */
-    function workspaceSequence(ctx, currentId) {
+    function workspaceSequence(ctx, anchorId) {
       const sessions = ctx.get('sessions')
       if (sessions === undefined) return undefined
       const snapshot = sessions.list.getSnapshot()
@@ -309,17 +314,22 @@ window.__ModuleLoader__.load({
         ? []
         : listedWorkspaces.pinnedSessionIds)
 
+      // One pass: which workspace accounts for which Session.
+      const ownerOf = new Map()
+      for (const workspace of items) {
+        for (const id of workspace.sessionIds) {
+          if (!ownerOf.has(id)) ownerOf.set(id, workspace)
+        }
+      }
+
       let members
-      const owner = items.find(workspace => workspace.sessionIds.includes(currentId))
+      const anchor = anchorId === undefined ? listed.find(id => ownerOf.has(id)) : anchorId
+      const owner = anchor === undefined ? undefined : ownerOf.get(anchor)
       if (owner !== undefined) {
         members = owner.sessionIds
       } else if (items.length > 0) {
         // Ungrouped bucket: listed Sessions no workspace accounts for.
-        const accounted = new Set()
-        for (const workspace of items) {
-          for (const id of workspace.sessionIds) accounted.add(id)
-        }
-        members = listed.filter(id => !accounted.has(id))
+        members = listed.filter(id => !ownerOf.has(id))
       } else {
         // No workspace registry: keep the flat list so the command still works.
         members = listed
@@ -329,7 +339,7 @@ window.__ModuleLoader__.load({
         const row = byId[id]
         if (row === undefined || row === null) return false
         if (row.origin === 'subagent') return false
-        if (row.blank === true && id !== currentId) return false
+        if (row.blank === true && id !== anchorId) return false
         return !archived.has(id)
       })
       const recency = (id) => {
@@ -353,14 +363,16 @@ window.__ModuleLoader__.load({
       const workspace = ctx.get('uiWorkspace')
       if (workspace === undefined) return undefined
       const current = currentSession(ctx)
-      if (current === undefined) return undefined
-      const sequence = workspaceSequence(ctx, current.id)
+      const sequence = workspaceSequence(ctx, current === undefined ? undefined : current.id)
       if (sequence === undefined || sequence.length === 0) return undefined
-      const at = sequence.indexOf(current.id)
+      // Nothing is presented — for example the open conversation was archived:
+      // enter that workspace's list from the side the arrow points at.
+      const at = current === undefined ? -1 : sequence.indexOf(current.id)
       const next = at < 0
         ? sequence[delta > 0 ? 0 : sequence.length - 1]
         : sequence[(at + delta + sequence.length) % sequence.length]
-      if (next === undefined || next === current.id) return undefined
+      if (next === undefined) return undefined
+      if (current !== undefined && next === current.id) return undefined
       return { workspace, id: next }
     }
 
