@@ -27,7 +27,7 @@ market/awesome-entry.md  可直接提交的 awesome-dsh-plugin 条目 + 分类 +
 在 GitHub 上新建**空仓库** `dsh-keynav`（不要带 README / LICENSE），然后：
 
 ```powershell
-cd C:\Users\1\Documents\deepseek-harness\default-workspace\dsh-keynav
+cd H:\DSH\dsh-keynav
 git push -u origin main
 ```
 
@@ -37,7 +37,7 @@ awesome-deepseek-harness 按 topic 同步）。
 ## ② 发布 npm（需要你的 npm 账号）
 
 ```powershell
-cd C:\Users\1\Documents\deepseek-harness\default-workspace\dsh-keynav
+cd H:\DSH\dsh-keynav
 npm login                    # 交互式
 npm whoami                   # 确认身份
 npm publish --access public
