@@ -16,6 +16,14 @@
   sidebar's default archived filter.
 - The workspace lookup builds one Session→Workspace index per press instead of
   searching every workspace per Session.
+- **`↑` / `↓` recall sent messages from an empty composer.** Repeated `↑` goes
+  older, `↓` goes newer and clears the draft after the newest item; editing a
+  recalled message hands the arrows back to the editor. Reads the official Chat
+  projection and restores text only from currently loaded history.
+- **`Ctrl+M` opens DSH's official model selector** without changing an existing
+  draft. Uses `Ctrl+Alt+M` on Web, where bare `Ctrl+M` is not an admitted binding.
+- The sidebar reference page now lists message history and model selection, with
+  live editable keycaps and read-only fixed-arrow rows.
 - Dictionaries for Spanish, French, German, Russian, and Portuguese.
 - `meta.detail` document with a feature image for the bundle detail page, and a
   raster `assets/icon-180.png` storefront tile for the plugin markets.

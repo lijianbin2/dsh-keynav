@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Navegação por teclado",
-    "description": "Adiciona três comportamentos de teclado: Ctrl+↑ / Ctrl+↓ movem a seleção na área de plugins (as linhas de plugins da barra lateral, a conversa primeiro), Alt+↑ / Alt+↓ percorrem apenas as sessões do espaço de trabalho atual (nunca entre espaços, na ordem «última atualização» da barra lateral) e Ctrl+J devolve o cursor à caixa de entrada da sessão atual. Todos os atalhos podem ser alterados em Configurações → Geral → Atalhos de teclado. Os atalhos com setas só têm valor predefinido no Windows e macOS Desktop, porque as regras Web e Linux reservam as setas para editar texto. Sem serviço Host, sem pedidos ao modelo, sem tráfego de rede.",
+    "description": "Adiciona três comportamentos de teclado: Ctrl+↑ / Ctrl+↓ movem a seleção na área de plugins (as linhas de plugins da barra lateral, a conversa primeiro), Alt+↑ / Alt+↓ percorrem apenas as sessões do espaço de trabalho atual (nunca entre espaços, na ordem «última atualização» da barra lateral) e Ctrl+J devolve o cursor à caixa de entrada da sessão atual. Com a caixa vazia, ↑/↓ recuperam texto de mensagens enviadas do histórico carregado e Ctrl+M abre o seletor oficial de modelo sem alterar o rascunho. Os atalhos editáveis ficam em Configurações → Geral → Atalhos de teclado. As setas de plugins/sessões só têm valor predefinido no Windows e macOS Desktop; as setas do histórico são entrada local fixa e Ctrl+M passa a Ctrl+Alt+M na Web. Sem serviço Host, sem pedidos ao modelo, sem tráfego de rede.",
     "detail": "docs/DETAIL.md"
   }
 }
